@@ -1,16 +1,19 @@
 ---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import SimpleCard from "@/components/SimpleCard.astro";
+const activeCat = await getCollection('categories', ({data}) => data.active === true);
+activeCat.sort((a, b) => a.data.name.localeCompare(b.data.name));
+activeCat.sort((a, b) => b.data.order - a.data.order);
 
+export const prerender = true;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Astro">
+
+	<!-- Elemento Carrito -->
+	<!-- <div class="text-center flex flex-col items-center gap-4 min-h-[calc(100svh_-4rem)] bg-slate-500 w-[calc(100%-2rem)] max-w-7xl mx-auto py-8 px-4 my-8"> -->
+		{activeCat.map(({data}) =>  
+		<SimpleCard  name={data.name} description={data.description} callToAction="Explora" slug={`/categoria/${data.slug}`} active={true}/>)}
+	<!-- </div> -->
+</Layout>

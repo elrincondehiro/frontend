@@ -3,14 +3,27 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "seed:categories": "tsx seeders/categories.ts",
+    "seed:products": "tsx seeders/products.ts",
+    "login": "echo %npm_config_varname%",
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.0.0-beta.8",
     "@astrojs/check": "^0.9.4",
+    "@astrojs/svelte": "^5.7.3",
+    "@astrojs/tailwind": "^5.1.2",
+    "astro": "^5.0.0-beta.8",
+    "svelte": "^5.1.16",
+    "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
+    "slugify": "^1.6.6",
+    "tsx": "^4.19.2",
+    "zod": "^3.23.8"
   }
 }

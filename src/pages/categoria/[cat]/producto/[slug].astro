@@ -2,20 +2,20 @@
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro"
 import { getCollection } from "astro:content";
-import SimpleCard from "@/components/SimpleCatCard.astro";
+import SimpleProdCard from "@/components/SimpleProdCard.astro";
 
 export  const  getStaticPaths  = (async() => {
   const products = await getCollection('products');
-  return products.flatMap(({data}) => data.categories.map((cat) => ({ params: { slug: data.slug, cat: cat }, props: { name: data.name, description: data.description} })));
+  return products.flatMap(({data}) => data.categories.map((cat) => ({ params: { slug: data.slug, cat: cat }, props: { name: data.name, description: data.description, categories: data.categories, active: data.active, stock: data.stock, price: data.price} })));
     
 }) satisfies GetStaticPaths;
 
 const {slug} = Astro.params;
-const {name, description} = Astro.props;
+const {name, description, categories, active, stock, price} = Astro.props;
 
 export const prerender = true;
 ---
 
 <Layout title={slug}>
-  <SimpleCard name={name} description={description} active={true} slug={slug}/>
+  <SimpleProdCard name={name} description={description} active={active} categories={categories} stock={stock} price={price} slug={slug} archiveView={false}/>
 </Layout>

@@ -2,7 +2,8 @@
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro"
 import { getCollection } from "astro:content";
-import SimpleCard from "@/components/SimpleCatCard.astro";
+import SimpleCatCard from "@/components/SimpleCatCard.astro";
+import SimpleProdCard from "@/components/SimpleProdCard.astro";
 
 export  const  getStaticPaths  = (async() => {
   const categories = await getCollection('categories', ({data}) => data.active === true);
@@ -13,7 +14,6 @@ export  const  getStaticPaths  = (async() => {
 }) satisfies GetStaticPaths;
 
 const {slug} = Astro.params;
-console.log(slug)
 const {name, description} = Astro.props;
 const products = await getCollection('products', ({data}) => data.categories.includes(slug));
 
@@ -21,7 +21,7 @@ export const prerender = true;
 ---
 
 <Layout title={slug}>
-  <SimpleCard name={name} description={description} active={true} slug={slug}/>
+  <SimpleCatCard name={name} description={description} active={true} slug={slug}/>
   {products.map(({data}) =>  
-  <SimpleCard name={data.name} description={data.description} callToAction="Ver" slug={`${slug}/producto/${data.slug}`} active={false}/>)}
+  <SimpleProdCard stock={data.stock} price={data.price} categories={data.categories} name={data.name} description={data.description} callToAction="Ver" slug={data.slug} active={data.active} archiveView={true}/>)}
 </Layout>

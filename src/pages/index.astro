@@ -14,6 +14,6 @@ export const prerender = true;
 	<!-- Elemento Carrito -->
 	<!-- <div class="text-center flex flex-col items-center gap-4 min-h-[calc(100svh_-4rem)] bg-slate-500 w-[calc(100%-2rem)] max-w-7xl mx-auto py-8 px-4 my-8"> -->
 		{activeCat.map(({data}) =>  
-		<SimpleCard  name={data.name} description={data.description} callToAction="Explora" slug={`/categoria/${data.slug}`} active={false}/>)}
+		<SimpleCard  name={data.name} description={data.description} callToAction="Explora" slug={data.slug} active={false}/>)}
 	<!-- </div> -->
 </Layout>

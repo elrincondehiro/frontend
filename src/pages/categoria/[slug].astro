@@ -16,12 +16,14 @@ export  const  getStaticPaths  = (async() => {
 const {slug} = Astro.params;
 const {name, description} = Astro.props;
 const products = await getCollection('products', ({data}) => data.categories.includes(slug));
-
+products.sort((a, b) => a.data.name.localeCompare(b.data.name));
+products.sort((a, b) => (b.data.featured?1:0) - (a.data.featured ? 1:0));
+products.sort((a, b) => (b.data.active?1:0) - (a.data.active?1:0));
 export const prerender = true;
 ---
 
 <Layout title={slug}>
   <SimpleCatCard name={name} description={description} active={true} slug={slug}/>
   {products.map(({data}) =>  
-  <SimpleProdCard stock={data.stock} price={data.price} categories={data.categories} name={data.name} description={data.description} callToAction="Ver" slug={data.slug} active={data.active} archiveView={true}/>)}
+  <SimpleProdCard stock={data.stock} featured={data.featured} price={data.price} categories={data.categories} name={data.name} description={data.description} callToAction="Ver" slug={data.slug} active={data.active} archiveView={true}/>)}
 </Layout>

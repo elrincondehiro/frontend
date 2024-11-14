@@ -9,10 +9,11 @@ interface Props {
   categories: string[];
   active: boolean;
   archiveView: boolean;
+  featured: boolean;
 }
 const path = Astro.url.pathname.split("/");
 
-const  {name, slug, description, callToAction, price, stock, categories, active, archiveView} = Astro.props;
+const  {name, slug, description, callToAction, featured, price, stock, categories, active, archiveView} = Astro.props;
 const bgColor = archiveView && active ?"transparent hover:bg-slate-700": "bg-slate-700"  ;
 const lineClamp = archiveView  ? "line-clamp-2" : "line-clamp-none" ;
 const textColor = archiveView  && active?"text-gray-200 hover:text-white": "text-white"; 
@@ -24,6 +25,7 @@ export const prerender = true
 
 <div transition:name={`prod-card-${path[2]}-${slug}`} class={`${bgColor} ${textColor} ${borderShadow} border-2 w-full  space-y-4 py-4 px-6 overflow-hidden relative rounded-lg`}>
   {!active &&<div class="absolute inset-0 bg-black/30 backdrop-blur-sm "></div>}
+  {active && featured && <div class="absolute bg-red-900/90 rounded-md px-4 ">TOP!</div>}
   <h1 class="font-bold text-2xl ">{name}</h1>
   <p class={`${lineClamp} text-wrap`}>{description+". "+description}</p>
   {archiveView && 

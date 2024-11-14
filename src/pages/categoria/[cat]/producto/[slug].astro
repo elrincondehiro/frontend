@@ -6,16 +6,16 @@ import SimpleProdCard from "@/components/SimpleProdCard.astro";
 
 export  const  getStaticPaths  = (async() => {
   const products = await getCollection('products');
-  return products.flatMap(({data}) => data.categories.map((cat) => ({ params: { slug: data.slug, cat: cat }, props: { name: data.name, description: data.description, categories: data.categories, active: data.active, stock: data.stock, price: data.price} })));
+  return products.flatMap(({data}) => data.categories.map((cat) => ({ params: { slug: data.slug, cat: cat }, props: { name: data.name, description: data.description, categories: data.categories, active: data.active, stock: data.stock, price: data.price, featured: data.featured } })));
     
 }) satisfies GetStaticPaths;
 
 const {slug} = Astro.params;
-const {name, description, categories, active, stock, price} = Astro.props;
+const {name, description, categories, active, stock, featured, price} = Astro.props;
 
 export const prerender = true;
 ---
 
 <Layout title={slug}>
-  <SimpleProdCard name={name} description={description} active={active} categories={categories} stock={stock} price={price} slug={slug} archiveView={false}/>
+  <SimpleProdCard featured={featured} name={name} description={description} active={active} categories={categories} stock={stock} price={price} slug={slug} archiveView={false}/>
 </Layout>

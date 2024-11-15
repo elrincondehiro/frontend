@@ -1,17 +1,19 @@
 ---
 name: Electronic Frozen Sausages
 slug: electronic-frozen-sausages
-description: The Synchronised asynchronous hardware Bacon offers reliable performance and lined design
-price: 272.99
-stock: 37
+description: Featuring Bromine-enhanced technology, our Shirt offers unparalleled overcooked performance
+price: 405.43
+stock: 2
 gallery:
-  - https://loremflickr.com/600/600/clothing?lock=2640237941263758
-  - https://loremflickr.com/600/600/clothing?lock=6783890926025096
-  - https://loremflickr.com/600/600/clothing?lock=4511389060821427
+  - https://loremflickr.com/600/600/movies?lock=3743778565177763
+  - https://loremflickr.com/600/600/movies?lock=8140864902040319
+  - https://loremflickr.com/600/600/movies?lock=2462088841160487
+  - https://loremflickr.com/600/600/movies?lock=3360932838996204
+  - https://loremflickr.com/600/600/movies?lock=1107225163287837
 categories:
-  - clothing
-  - baby
-  - health
+  - movies
+  - music
+  - computers
 active: true
 featured: false
 ---

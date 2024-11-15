@@ -22,8 +22,26 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
 ---
 
 
-<div class={classes}>
+<div data-add-to-cart data-product-id={id} class={classes}>
   <span class="truncate"> 
     {data? text: "No Disponible"}
   </span>
 </div>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  // Seleccionamos todos los botones por clase
+  const buttons = document.querySelectorAll('[data-add-to-cart]');
+  buttons.forEach(button => {
+    button.addEventListener('click', async(e) => {
+      e.preventDefault();
+      console.log("button click");
+      const productId = (button as HTMLElement).dataset.productId;
+      if (productId) {
+        console.log("productId", productId);
+        const {data, error} = await actions.addToCart(productId);
+        if (!error) data? alert("item añadido "+productId) : alert("fallo añadir item "+productId);
+      }
+    });
+  });

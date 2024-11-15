@@ -29,20 +29,19 @@ const variantClasses = {
 
 // Clases para el estado disabled
 const disabledClasses = disabled || !data ? "cursor-not-allowed" : "";
-
 const classes = `${baseClasses} ${variantClasses[variant]} ${disabledClasses}`;
 
 // Clases para el overlay blur cuando está disabled
 const overlayClasses = "absolute inset-0 backdrop-blur-sm bg-white/30 opacity-50 group-hover:opacity-100 transition-opacity duration-200";
 ---
 
-<div class="relative inline-block">
+<div data-add-to-cart data-product-id={href} class="relative inline-block">
   {/* Contenedor principal que mantiene las dimensiones */}
   <div class={classes}>
     {/* Si no está disabled, envolvemos en un anchor */}
     {!disabled && data? (
       <a 
-        href={href}
+        
         class="absolute inset-4 flex items-center justify-center"
       >
         <span class="truncate">
@@ -68,3 +67,21 @@ const overlayClasses = "absolute inset-0 backdrop-blur-sm bg-white/30 opacity-50
     }
   </div>
 </div>
+
+<script>
+  import { actions } from 'astro:actions';
+
+  // Seleccionamos todos los botones por clase
+  const buttons = document.querySelectorAll('[data-add-to-cart]');
+  buttons.forEach(button => {
+    
+    button.addEventListener('click', async() => {
+      const productId = (button as HTMLElement).dataset.productId;
+      if (productId) {
+        console.log("productId", productId);
+        const {data, error} = await actions.addToCart(productId);
+        if (!error) data? alert("item añadido "+productId) : alert("fallo añadir item "+productId);
+      }
+    });
+  });
+</script>

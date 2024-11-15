@@ -1,0 +1,33 @@
+---
+
+interface Props {
+  text: string;
+  href: string | undefined;
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
+  className?: string;
+}
+
+const {text, href = undefined , variant = "primary", disabled = false, className =""} = Astro.props;
+
+const variantClasses = {
+  primary: "transparent text-gray-200 hover:bg-gray-200 hover:text-slate-600",
+  secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300"
+};
+
+const baseClasses = "overflow-hidden inline-block w-40 h-10 px-4 py-2 border-2 border-blue-400 transition-all duration-200 flex items-center justify-center relative group";
+
+const classes = `${baseClasses} ${variantClasses[variant]} ${disabled ? "cursor-not-allowed" : ""} ${className}`;
+
+
+---
+
+
+<div class={classes}>
+  {!disabled && href &&(
+    <a href={href} class="absolute inset-0"></a>
+  )}
+  <span class="truncate">
+    {text}  
+  </span>
+</div>

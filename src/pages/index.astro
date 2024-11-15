@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import SimpleCard from "@/components/SimpleCatCard.astro";
+import SimpleCatCard from "@/components/SimpleCatCard.astro";
 const activeCat = await getCollection('categories', ({data}) => data.active === true);
 activeCat.sort((a, b) => a.data.name.localeCompare(b.data.name));
 activeCat.sort((a, b) => b.data.order - a.data.order);
@@ -9,11 +9,9 @@ activeCat.sort((a, b) => b.data.order - a.data.order);
 export const prerender = true;
 ---
 
-<Layout title="Astro">
-
+<Layout title="Categorias">
 	<!-- Elemento Carrito -->
-	<!-- <div class="text-center flex flex-col items-center gap-4 min-h-[calc(100svh_-4rem)] bg-slate-500 w-[calc(100%-2rem)] max-w-7xl mx-auto py-8 px-4 my-8"> -->
-		{activeCat.map(({data}) =>  
-		<SimpleCard  name={data.name} description={data.description} callToAction="Explora" slug={data.slug} active={false}/>)}
-	<!-- </div> -->
+	{activeCat.map(({data}) =>  
+		<SimpleCatCard  name={data.name} description={data.description} slug={data.slug} view="archive"/>
+	)}
 </Layout>

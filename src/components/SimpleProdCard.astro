@@ -1,29 +1,39 @@
 ---
-import ButtonFixed from "./ButtonFixed.astro";
+import ButtonFix from "@/components/ButtonFix.astro";
+
 interface Props {
   name: string;
   slug: string;
   description: string;
-  callToAction?: string;
   price: number;
   stock: number;
   categories: string[];
   active: boolean;
-  archiveView: boolean;
   featured: boolean;
+  view: "archive" | "hero";
 }
-const path = Astro.url.pathname.split("/");
+const path = Astro.url.pathname;
+console.log(path);
 
-const  {name, slug, description, callToAction, featured, price, stock, categories, active, archiveView} = Astro.props;
-const bgColor = archiveView && active ?"hover:bg-slate-700": "bg-slate-700"  ;
-const lineClamp = archiveView  ? "line-clamp-2" : "line-clamp-none" ;
-const textColor = archiveView  && active?"text-gray-200 hover:text-white": "text-white"; 
-const borderShadow = archiveView && active ? "border-blue-400 hover:border-blue-500 hover:shadow-2xl" : "shadow-2xl border-blue-500";
+const  {name, slug, description, price, stock, categories, active, featured, view} = Astro.props;
+
+const viewType = {
+  archive: "bg-slate-600 text-gray-200 border-blue-400 hover:bg-slate-700 hover:border-blue-500 hover:shadow-2xl hover:text-white" ,
+  hero: "bg-slate-700 border-blue-500 shadow-2xl text-white"
+}
+
+const classes = viewType[view];
 
 export const prerender = true
 
 ---
 
+<div transition:name={`prod-card-${slug}`} class={`${classes} overflow-hidden border-2 w-full space-y-4 py-4 px-6 rounded-lg flex flex-col items-center`}>
+  <h1 class="font-bold text-2xl ">{name}</h1>
+  <p class={view === "archive" ? "line-clamp-2" : "line-clamp-none"}>{description+". "+description}</p>
+  {view === "archive" && <ButtonFix text="Saber Más" href={`${path}/producto/${slug}`}/>}
+</div>
+<!-- 
 <div transition:name={`prod-card-${path[2]}-${slug}`} class={`${bgColor} ${textColor} ${borderShadow} border-2 w-full  space-y-4 py-4 px-6 overflow-hidden relative rounded-lg`}>
   {!active &&<div class="absolute z-10 inset-0 bg-black/30 backdrop-blur-sm "/>}
   {active && featured && <div class="absolute -ml-7 -mt-5  bg-red-900/90 rounded-md px-4 pt-1 sm:ml-0 sm:mt-0 sm:pt-0 ">Top!</div>}
@@ -55,7 +65,7 @@ export const prerender = true
     
   </div>
   }
-</div>
+</div> -->
 
 <!-- <style>
   * {

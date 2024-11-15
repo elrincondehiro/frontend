@@ -23,7 +23,10 @@ export const prerender = true;
 ---
 
 <Layout title={slug}>
-  <SimpleCatCard name={name} description={description} active={true} slug={slug}/>
-  {products.map(({data}) =>  
-  <SimpleProdCard stock={data.stock} featured={data.featured} price={data.price} categories={data.categories} name={data.name} description={data.description} callToAction="Ver" slug={data.slug} active={data.active} archiveView={true}/>)}
+  <SimpleCatCard name={name} description={description}  slug={slug} view="hero"/>
+  {products.map(({data}) => {
+    const {name, slug, description, price, stock, categories, active, featured} = data;
+    return <SimpleProdCard stock={stock} featured={featured} price={price} categories={categories} name={name} description={description} slug={slug} active={active} view="archive"/>
+    }
+  )} 
 </Layout>

@@ -1,17 +1,20 @@
 ---
 name: Licensed Frozen Mouse
 slug: licensed-frozen-mouse
-description: The indigo Bacon combines Madagascar aesthetics with Bromine-based durability
-price: 10.79
-stock: 45
+description: Hoeger - Spinka's most advanced Salad technology increases excitable capabilities
+price: 215.15
+stock: 41
 gallery:
-  - https://loremflickr.com/600/600/electronics?lock=8129063306779213
-  - https://loremflickr.com/600/600/electronics?lock=331173304521934
-  - https://loremflickr.com/600/600/electronics?lock=3538055524385792
-  - https://loremflickr.com/600/600/electronics?lock=8491907495124145
-  - https://loremflickr.com/600/600/electronics?lock=8771290306313310
+  - https://loremflickr.com/600/600/baby?lock=3205244805173289
+  - https://loremflickr.com/600/600/baby?lock=6475489485975283
+  - https://loremflickr.com/600/600/baby?lock=4263473036045380
+  - https://loremflickr.com/600/600/baby?lock=5216640649559453
+  - https://loremflickr.com/600/600/baby?lock=2888762159964644
+  - https://loremflickr.com/600/600/baby?lock=6455541714800030
 categories:
-  - electronics
+  - baby
+  - tools
+  - automotive
 active: true
 featured: false
 ---

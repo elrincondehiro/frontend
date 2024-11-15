@@ -9,7 +9,7 @@ export const server = {
         return await new Promise((resolve, reject) => {
           setTimeout(() => {
             try {
-              Math.random() < 0.5 ? resolve(false) : resolve(true);
+              Math.random() < 0.2 ? resolve(false) : resolve(true);
               // resolve(true);
             } catch (error) {
               reject(error);

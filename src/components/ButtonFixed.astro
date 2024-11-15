@@ -1,0 +1,70 @@
+---
+// Button.astro
+import { actions } from "astro:actions";
+interface Props {
+  text: string;
+  href: string;
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
+  defer?: boolean;
+}
+
+const { 
+  text, 
+  href =  "",
+  variant = "primary",
+  disabled = false,
+  defer = false 
+} = Astro.props;
+
+const {data, error} = defer ? await actions.checkStock(href) : {data: true, error: ""};
+// Clases base que siempre tendrá el botón
+const baseClasses = "inline-block  w-40 h-10 px-4 py-2 border-2 border-blue-400 transition-all duration-200 flex items-center justify-center relative group";
+
+// Clases específicas según la variante
+const variantClasses = {
+  primary: "transparent text-gray-200 hover:bg-gray-200 hover:text-slate-600",
+  secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300"
+};
+
+// Clases para el estado disabled
+const disabledClasses = disabled || !data ? "cursor-not-allowed" : "";
+
+const classes = `${baseClasses} ${variantClasses[variant]} ${disabledClasses}`;
+
+// Clases para el overlay blur cuando está disabled
+const overlayClasses = "absolute inset-0 backdrop-blur-sm bg-white/30 opacity-50 group-hover:opacity-100 transition-opacity duration-200";
+---
+
+<div class="relative inline-block">
+  {/* Contenedor principal que mantiene las dimensiones */}
+  <div class={classes}>
+    {/* Si no está disabled, envolvemos en un anchor */}
+    {!disabled && data? (
+      <a 
+        href={href}
+        class="absolute inset-4 flex items-center justify-center"
+      >
+        <span class="truncate">
+          {text}
+        </span>
+      </a>
+    ) : data ? (
+      /* Si está disabled, solo mostramos el texto */
+      <span class="w- truncate">
+        {text}
+      </span>
+    ) : (
+      <span class="truncate">
+        {"No Disponible"}
+      </span>
+    ) }
+    
+    {/* Overlay blur que solo se muestra cuando está disabled */}
+    {(disabled || !data) && 
+      <div class={overlayClasses}>
+        <span class="sr-only">Button disabled</span>
+      </div>
+    }
+  </div>
+</div>

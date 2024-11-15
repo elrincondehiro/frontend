@@ -1,5 +1,6 @@
 ---
 import ButtonFix from "@/components/ButtonFix.astro";
+import { normalizePath } from "@/lib/utils";
 interface Props {
   name: string;
   slug: string;
@@ -21,5 +22,5 @@ export const prerender = true
 <div transition:name={`cat-card-${slug}`} class={`${classes} overflow-hidden border-2 w-full space-y-4 py-4 px-6 rounded-lg flex flex-col items-center`}>
   <h1 class="font-bold text-2xl ">{name}</h1>
   <p class={view === "archive" ? "line-clamp-2" : "line-clamp-none"}>{description+". "+description}</p>
-  {view === "archive" && <ButtonFix text="Ver Todos" href={`categoria/${slug}`}/>}
+  {view === "archive" && <ButtonFix text="Ver Todos" href={normalizePath(`/categoria/${slug}`)}/>}
 </div>

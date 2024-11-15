@@ -1,6 +1,7 @@
 ---
 import ButtonFix from "@/components/ButtonFix.astro";
 import { normalizePath } from "@/lib/utils";
+import AddToCart from "./AddToCart.astro";
 
 interface Props {
   name: string;
@@ -31,6 +32,10 @@ export const prerender = true
 <div transition:name={`prod-card-${slug}`} class={`${classes} overflow-hidden border-2 w-full space-y-4 py-4 px-6 rounded-lg flex flex-col items-center`}>
   <h1 class="font-bold text-2xl ">{name}</h1>
   <p class={view === "archive" ? "line-clamp-2" : "line-clamp-none"}>{description+". "+description}</p>
+  {view === "archive" && 
+    (<AddToCart server:defer text="Añadir al Carrito" id={slug}>
+      <ButtonFix slot="fallback" text="Cargando" href="" disabled={true}/>
+    </AddToCart>)}
   {view === "archive" && <ButtonFix text="Saber Más" href={normalizePath(`${path}//producto/${slug}`)}/>}
 </div>
 <!-- 

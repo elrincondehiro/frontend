@@ -1,0 +1,29 @@
+---
+import { actions } from "astro:actions";
+interface Props {
+  text: string;
+  id: string;
+  variant?: "primary" | "secondary";
+  className?: string;
+}
+
+const {text, id , variant = "primary", className =""} = Astro.props;
+
+const variantClasses = {
+  primary: "transparent text-gray-200 hover:bg-gray-200 hover:text-slate-600",
+  secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300"
+};
+
+const baseClasses = "overflow-hidden inline-block w-40 h-10 px-4 py-2 border-2 border-blue-400 transition-all duration-200 flex items-center justify-center relative group";
+const {data, error} = await actions.checkStock(id);
+const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not-allowed" : ""} ${className}`;
+
+
+---
+
+
+<div class={classes}>
+  <span class="truncate"> 
+    {data? text: "No Disponible"}
+  </span>
+</div>

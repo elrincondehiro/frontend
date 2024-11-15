@@ -9,8 +9,9 @@ const {id} = Astro.props;
 const {data, error} = await actions.checkStock(id);
 console.log("-----------------------"+id+"-----------------------"); 
 console.log( data + " - " + error);
+const hover  = data? "hover:bg-gray-200 hover:text-slate-600" : "";
 ---
-<a class="relative border-2 border-blue-400 hover:bg-gray-200 hover:text-slate-600 px-4 py-2">
+<a class={`relative border-2 border-blue-400 ${hover} px-4 py-2`} href="#">
   {!data && "  No disponible  "}
   {data && "Añadir al Carrito"}
   {!data && <div class="absolute inset-0 bg-black/30 backdrop-blur-sm"/>}

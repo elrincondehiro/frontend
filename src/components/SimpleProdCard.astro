@@ -34,7 +34,7 @@ export const prerender = true
     <a class="inline-block px-4 py-2 border-2 border-blue-400 hover:bg-gray-200 hover:text-slate-600 " href={path[2]+"/producto/"+slug}>{callToAction+" "+name}</a>
     {/* Coponente de añadir al carrito  */}
     {active &&<ButtonAddToCart server:defer id={slug}>
-      <a slot="fallback" class="relative border-2 border-blue-400 hover:bg-gray-200 hover:text-slate-600 px-4 py-2">
+      <a slot="fallback" class="relative border-2 border-blue-400 hover:bg-gray-200 hover:text-slate-600 px-4 py-2" href="#">
         {"    Cargando    "}
       </a>
     </ButtonAddToCart>}

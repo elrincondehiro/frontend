@@ -74,8 +74,8 @@ const overlayClasses = "absolute inset-0 backdrop-blur-sm bg-white/30 opacity-50
   // Seleccionamos todos los botones por clase
   const buttons = document.querySelectorAll('[data-add-to-cart]');
   buttons.forEach(button => {
-    
     button.addEventListener('click', async() => {
+      console.log("button click");
       const productId = (button as HTMLElement).dataset.productId;
       if (productId) {
         console.log("productId", productId);

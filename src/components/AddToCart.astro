@@ -25,7 +25,7 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
 
 <div data-add-to-cart data-product-id={id} class={classes}>
   <span class="truncate"> 
-    {data? <Button client:load/> : "No Disponible"}
+    {data? (<Button client:load={true}> Añadir al Carrito </Button>) : "No Disponible"}
   </span>
 </div>
 

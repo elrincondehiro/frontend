@@ -10,7 +10,6 @@
   ],
   "compilerOptions": {
     "types": ["svelte"],
-    "moduleResolution": "node10",
     "baseUrl": ".",
     "paths": {
       "@/*": [

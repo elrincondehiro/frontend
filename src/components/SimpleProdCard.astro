@@ -2,6 +2,7 @@
 import ButtonFix from "@/components/ButtonFix.astro";
 import { normalizePath } from "@/lib/utils";
 import AddToCart from "./AddToCart.astro";
+import Button from "./button.svelte";
 
 interface Props {
   name: string;
@@ -36,6 +37,7 @@ export const prerender = true
     (<AddToCart server:defer text="Añadir al Carrito" id={slug}>
       <ButtonFix slot="fallback" text="Cargando" href="" disabled={true}/>
     </AddToCart>)}
+    <Button client:load/>
   {view === "archive" && <ButtonFix text="Saber Más" href={normalizePath(`${path}//producto/${slug}`)}/>}
 </div>
 <!-- 

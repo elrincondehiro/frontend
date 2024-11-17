@@ -25,11 +25,13 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
 
 <div data-add-to-cart data-product-id={id} class={classes}>
   <span class="truncate"> 
-    {data? (<Button client:load={true}> Añadir al Carrito </Button>) : "No Disponible"}
+    {data?  "Añadir al Carrito" : "No Disponible"}
   </span>
 </div>
 
-<!-- <script>
+<!-- (<Button client:load={true}> Añadir al Carrito </Button>) -->
+
+<script>
   import { actions } from 'astro:actions';
   function addToCart() {
     const buttons = document.querySelectorAll('[data-add-to-cart]');
@@ -54,4 +56,4 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
   // Seleccionamos todos los botones por clase
   
   
-</script> -->
+</script>

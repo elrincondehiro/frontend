@@ -34,7 +34,7 @@ export const prerender = true
   <h1 class="font-bold text-2xl ">{name}</h1>
   <p class={view === "archive" ? "line-clamp-2" : "line-clamp-none"}>{description+". "+description}</p>
   {view === "archive" && 
-    (<AddToCart transition:persist server:defer text="Añadir al Carrito" id={slug}>
+    (<AddToCart server:defer text="Añadir al Carrito" id={slug}>
       <ButtonFix slot="fallback" text="Cargando" href="" disabled={true}/>
     </AddToCart>)}
     

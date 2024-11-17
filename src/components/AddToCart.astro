@@ -1,6 +1,6 @@
 ---
 import { actions } from "astro:actions";
-import  Button  from "@/components/Button.svelte";
+import  Boton  from "@/components/Boton.svelte";
 interface Props {
   text: string;
   id: string;
@@ -23,18 +23,21 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
 ---
 
 
-<div data-add-to-cart data-product-id={id} class={classes}>
+<div  class={classes}>
   <span class="truncate"> 
-    {data?  "Añadir al Carrito" : "No Disponible"}
+    {data?  <Boton client:load id={id}> Añadir al Carrito </Boton> : "No Disponible"}
   </span>
 </div>
 
 <!-- (<Button client:load={true}> Añadir al Carrito </Button>) -->
-
+<!-- 
 <script>
+  console.log("texto kjasjdklajdlas lkjasdlkasd");
   import { actions } from 'astro:actions';
   function addToCart() {
+    console.log("add to cart");
     const buttons = document.querySelectorAll('[data-add-to-cart]');
+    console.log("buttons", buttons);
   buttons.forEach(button => {
     button.addEventListener('click', async(e) => {
       e.preventDefault();
@@ -47,13 +50,18 @@ const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not
       }
     });
   });
+  console.log("buttons after", buttons);
   }
   
-  document.addEventListener('astro:after-swap', addToCart);
-  document.addEventListener('astro:page-load', addToCart);
+  document.addEventListener('astro:after-swap', () => {
+    console.log("after swap");
+    addToCart()});
+  document.addEventListener('astro:page-load', () => {
+    console.log("page load");
+    addToCart()});
   addToCart();
 
   // Seleccionamos todos los botones por clase
   
   
-</script>
+</script> -->

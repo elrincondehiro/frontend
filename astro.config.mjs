@@ -8,6 +8,6 @@ import vercel from '@astrojs/vercel/serverless';
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  integrations: [tailwind(), svelte()],
+  integrations: [tailwind(), svelte({ extensions: ['.svelte'] })],
   adapter: vercel()
 });

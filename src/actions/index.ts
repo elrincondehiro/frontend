@@ -26,13 +26,12 @@ export const server = {
     input: z.string(),
     handler: async (input, context) => {
       try {
-        // Verificar el stock del producto en el backend
         const {data, error} = await actions.checkStock(input);
-        console.log('stockAvailable', data);
-        if (!error && data) {
+        // Verificar el stock del producto en el backend
+        if (data && !error) {
           // Agregar el producto al carrito
           
-          console.log('item añadido');
+          console.log('item añadido en servidor');
           return true;
         } else {
           // Mostrar un mensaje de error indicando que no hay stock disponible

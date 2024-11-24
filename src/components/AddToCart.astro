@@ -19,49 +19,13 @@ const baseClasses = "overflow-hidden inline-block w-40 h-10 px-4 py-2 border-2 b
 const {data, error} = await actions.checkStock(id);
 const classes = `${baseClasses} ${variantClasses[variant]} ${!data ? "cursor-not-allowed" : ""} ${className}`;
 
-
 ---
-
-
+    
 <div  class={classes}>
+  
   <span class="truncate"> 
-    {data?  <Boton client:load id={id}> Añadir al Carrito </Boton> : "No Disponible"}
+
+    {data?  <Boton client:load id={id}>{text} </Boton> : "No Disponible"}
   </span>
 </div>
 
-<!-- (<Button client:load={true}> Añadir al Carrito </Button>) -->
-<!-- 
-<script>
-  console.log("texto kjasjdklajdlas lkjasdlkasd");
-  import { actions } from 'astro:actions';
-  function addToCart() {
-    console.log("add to cart");
-    const buttons = document.querySelectorAll('[data-add-to-cart]');
-    console.log("buttons", buttons);
-  buttons.forEach(button => {
-    button.addEventListener('click', async(e) => {
-      e.preventDefault();
-      console.log("button click");
-      const productId = (button as HTMLElement).dataset.productId;
-      if (productId) {
-        console.log("productId", productId);
-        const {data, error} = await actions.addToCart(productId);
-        if (!error) data? alert("item añadido "+productId) : alert("fallo añadir item "+productId);
-      }
-    });
-  });
-  console.log("buttons after", buttons);
-  }
-  
-  document.addEventListener('astro:after-swap', () => {
-    console.log("after swap");
-    addToCart()});
-  document.addEventListener('astro:page-load', () => {
-    console.log("page load");
-    addToCart()});
-  addToCart();
-
-  // Seleccionamos todos los botones por clase
-  
-  
-</script> -->

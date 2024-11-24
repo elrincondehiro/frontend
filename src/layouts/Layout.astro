@@ -25,6 +25,15 @@ const { title } = Astro.props;
 				<slot/>
 			</div>
 		</main>
+
+		<script>
+      import { initializeCart } from '@/lib/cartStore';
+      
+      // Esperar a que el DOM esté listo
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeCart();
+      });
+    </script>
 		<!-- <Footer/> -->
 	</body>
 </html>

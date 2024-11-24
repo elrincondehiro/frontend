@@ -21,5 +21,26 @@ export const ProductSchema = z.object({
   featured: z.boolean(),
 });
 
+export const CartItemSchema = ProductSchema
+  .omit({
+    stock:true,
+    gallery:true,
+    categories:true,
+    active:true,
+    featured:true,
+  })
+  .extend({
+    imageSrc: z.string().url(),
+    quantity: z.number().int().nonnegative(),
+  }
+);
+
+export const CartSchema = z.object({
+  items: z.array(CartItemSchema),
+  total: z.number().nonnegative(),
+});
+
+export type Cart = z.infer<typeof CartSchema>;
+export type CartItem = z.infer<typeof CartItemSchema>;
 export type Product = z.infer<typeof ProductSchema>;
 export type Category = z.infer<typeof CategorySchema>;

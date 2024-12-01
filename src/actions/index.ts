@@ -46,4 +46,40 @@ export const server = {
 
     }
   }),
+  createUser: defineAction({
+    accept: 'form',
+    input: z.object({
+      username: z.string(),
+      email: z.string().email(),
+      password: z.string().min(8),
+    }),
+    handler: async ({ username, email, password  }) => {
+      try {
+
+        const data = {email, username, password};
+        console.log(data);
+        const response = await fetch('http://localhost:1337/api/auth/local/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Usuario registrado:', data);
+          // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
+        } else {
+          console.error('Error en el registro');
+          console.error(response);
+          console.error(response.status);
+          // Aquí puedes mostrar un mensaje de error al usuario
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Aquí puedes mostrar un mensaje de error al usuario
+      }
+      /* ... */ },
+  }),
 }

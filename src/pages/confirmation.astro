@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { max } from "lodash";
+
+
+const confToken = Astro.request.url.split('?')[1];
+const accesToken = Astro.url.searchParams.get('access_token');
+const responseUserInfo  = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accesToken}`).then(res => res.json());
+console.log(responseUserInfo);
+const redirectTo = '/';
+const response = await fetch(`http://localhost:1337/api/auth/google/callback?${confToken}`).then(res => res.json());
+
+console.log("-------------------------------TOKEN-------------------------------")
+console.log(confToken);
+
+console.log("-------------------------------RESPONSE-------------------------------")
+console.log(response);
+
+const cookies = Astro.cookies;
+
+cookies.set( 'jwt', response.jwt? response.jwt : null, { path: '/', httpOnly: true, secure: true, sameSite: 'strict' , maxAge: 604800 });
+export const prerender = false;
+---
+
+
+<html>
+<head>
+  <title>Confirmación</title>
+  {accesToken && (
+    <meta http-equiv="refresh" content={`3;url=${redirectTo}`} />
+  )}
+</head>
+
+  <h1>Confirmacion</h1>
+  <p>{response.user.username} seras redireccionado en 3 segundos</p>
+  
+</html>
+

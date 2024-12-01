@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro"
 import { getCollection } from "astro:content";
 import SimpleCatCard from "@/components/SimpleCatCard.astro";
 import SimpleProdCard from "@/components/SimpleProdCard.astro";
+import CartDisplay from "@/components/CartDisplay.svelte";
 
 export  const  getStaticPaths  = (async() => {
   const categories = await getCollection('categories', ({data}) => data.active === true);
@@ -23,6 +24,7 @@ export const prerender = true;
 ---
 
 <Layout title={slug}>
+  <CartDisplay transition:name="CartDisplay"  client:load/>
   <SimpleCatCard name={name} description={description}  slug={slug} view="hero"/>
   {products.map(({data}) => {
     const {name, slug, description, price, stock, categories, active, featured} = data;

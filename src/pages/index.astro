@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import SimpleCatCard from "@/components/SimpleCatCard.astro";
 import RegisterForm from "@/components/RegisterForm.astro";
 import AuthLink from "@/components/AuthLink.svelte";
+import { BACK_END_URL } from "astro:env/client";
 import CartDisplay from "@/components/CartDisplay.svelte";
 import AccountLink from "@/components/AccountLink.astro";
 const activeCat = await getCollection('categories', ({data}) => data.active === true);
@@ -21,7 +22,7 @@ export const prerender = true;
 		</AccountLink>
 	 <!-- <AuthLink client:load/> -->
 	<RegisterForm />
-	<a href="http://localhost:1337/api/connect/google">
+	<a href=`${BACK_END_URL}/api/connect/google`>
 		Sign-in with Google
 	</a>
 	{activeCat.map(({data}) =>  

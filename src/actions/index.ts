@@ -1,4 +1,5 @@
 import { actions, defineAction } from 'astro:actions';
+import { BACK_END_URL } from 'astro:env/client';
 import { z } from 'astro:schema';
 
 export const server = {
@@ -58,7 +59,7 @@ export const server = {
 
         const data = {email, username, password};
         console.log(data);
-        const response = await fetch('http://localhost:1337/api/auth/local/register', {
+        const response = await fetch(`${BACK_END_URL}/api/auth/local/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

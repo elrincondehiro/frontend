@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { BACK_END_URL } from "astro:env/client";
 import type { max } from "lodash";
 
 
@@ -8,7 +9,7 @@ const accesToken = Astro.url.searchParams.get('access_token');
 const responseUserInfo  = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accesToken}`).then(res => res.json());
 console.log(responseUserInfo);
 const redirectTo = '/';
-const response = await fetch(`http://localhost:1337/api/auth/google/callback?${confToken}`).then(res => res.json());
+const response = await fetch(`${BACK_END_URL}/api/auth/google/callback?${confToken}`).then(res => res.json());
 
 console.log("-------------------------------TOKEN-------------------------------")
 console.log(confToken);

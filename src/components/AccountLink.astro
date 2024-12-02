@@ -1,14 +1,17 @@
 ---
+import { BACK_END_URL } from "astro:env/client";
+
 
 const at = Astro.cookies.get('jwt');
 
+const url = `${BACK_END_URL}/api/connect/google`;
 
 // console.log(at);
 
 export const prerender = false;
 ---
 
-{at? <a class="auth-link" href="/">Mi Cuenta</a> : <a class="auth-link" href="http://localhost:1337/api/connect/google">Log In</a>}
+{at? <a class="auth-link" href="/">Mi Cuenta</a> : <a class="auth-link" href={url}>Log In</a>}
 
 <style>
   .auth-link {

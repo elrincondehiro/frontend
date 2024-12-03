@@ -21,10 +21,10 @@ export const prerender = true;
 		<a slot="fallback" class="auth-link" href="/">Loading...</a>
 		</AccountLink>
 	 <!-- <AuthLink client:load/> -->
-	<RegisterForm />
-	<a href=`${BACK_END_URL}/api/connect/google`>
-		Sign-in with Google
-	</a>
+	<!-- <RegisterForm /> -->
+	<!-- <a href=`${BACK_END_URL}/api/connect/google`> -->
+		<!-- Sign-in with Google -->
+	<!-- </a> -->
 	{activeCat.map(({data}) =>  
 		<SimpleCatCard  name={data.name} description={data.description} slug={data.slug} view="archive"/>
 	)}

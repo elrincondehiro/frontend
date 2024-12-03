@@ -24,6 +24,7 @@ export const prerender = true;
 ---
 
 <Layout title={slug}>
+  <a href="..">Volver atrás</a>
   <CartDisplay transition:name="CartDisplay"  client:load/>
   <SimpleCatCard name={name} description={description}  slug={slug} view="hero"/>
   {products.map(({data}) => {

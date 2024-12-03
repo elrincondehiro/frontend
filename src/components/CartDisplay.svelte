@@ -26,6 +26,10 @@
 
 <style>
   .cart-display {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
     padding: 1rem;
     color: #333;
     background-color: #fff;
